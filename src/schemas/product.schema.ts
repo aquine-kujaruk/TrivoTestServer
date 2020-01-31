@@ -1,13 +1,10 @@
 import * as mongoose from 'mongoose';
 
-export const UsersSchema = new mongoose.Schema(
+export const ProductsSchema = new mongoose.Schema(
 	{
-		_id: String,
 		name: String,
+		description: String,
 		picture: String,
-		email: String,
-		roles: [{type: String}],
-		age: Number,
 		state: {
 			type: Boolean,
 			default: true,

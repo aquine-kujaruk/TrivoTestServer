@@ -12,4 +12,13 @@ export class FirebaseService {
 	static get getAdmin(): any {
 		return admin;
 	}
+
+	static async setRoleClaims(id: string, roles: string[]) {
+		await admin
+			.auth()
+			.setCustomUserClaims(id, {roles})
+			.then(() => {
+				console.log('Successful role claims update');
+			});
+	}
 }

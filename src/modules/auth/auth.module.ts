@@ -1,9 +1,9 @@
 import {Module} from '@nestjs/common';
 import {MongooseModule} from '@nestjs/mongoose';
+import {UsersSchema} from '../../schemas/user.schema';
 import {FirebaseService} from '../../services/firebase.service';
 import {AuthController} from '../auth/auth.controller';
 import {AuthRepository} from './auth.repository';
-import {UsersSchema} from './user.schema';
 
 @Module({
 	imports: [

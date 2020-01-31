@@ -1,4 +1,9 @@
-import { Module } from '@nestjs/common';
+import {Module} from '@nestjs/common';
+import {GraphController} from './graph.controller';
+import {GraphRepository} from './graph.repository';
 
-@Module({})
+@Module({
+	controllers: [GraphController],
+	providers: [GraphRepository],
+})
 export class GraphModule {}

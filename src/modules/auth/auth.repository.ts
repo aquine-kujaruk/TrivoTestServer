@@ -12,7 +12,16 @@ export class AuthRepository {
 		try {
 			const loggedInUser = await this.userDb.findById(user._id);
 
-			if (loggedInUser) return loggedInUser;
+			if (loggedInUser) {
+				for (const role of loggedInUser.roles) {
+					if (!user.roles.includes(role)) {
+						await FirebaseService.setRoleClaims(user._id, loggedInUser.roles);
+						break;
+					}
+				}
+
+				return loggedInUser;
+			}
 
 			return await this.RegisterUser(user);
 		} catch (e) {
@@ -21,21 +30,13 @@ export class AuthRepository {
 	}
 
 	async RegisterUser(user: User): Promise<User> {
-		const role = 'USER';
-
-		const addRole = user.roles.includes(role)
-			? user.roles
-			: [...user.roles, role];
-
 		try {
 			const registeredUser = await this.userDb({
 				...user,
-				roles: addRole,
+				roles: ['USER'],
 			}).save();
 
-			await FirebaseService.getAdmin
-				.auth()
-				.setCustomUserClaims(user._id, {roles: registeredUser.roles});
+			await FirebaseService.setRoleClaims(user._id, registeredUser.roles);
 
 			return registeredUser;
 		} catch (e) {
