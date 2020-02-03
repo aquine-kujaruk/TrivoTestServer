@@ -7,7 +7,9 @@ import {AuthController} from './modules/auth/auth.controller';
 import {AuthModule} from './modules/auth/auth.module';
 import {GraphModule} from './modules/graph/graph.module';
 import {ProductModule} from './modules/product/product.module';
+import {PurchaseModule} from './modules/purchase/purchase.module';
 import {FirebaseService} from './services/firebase.service';
+import {GraphService} from './services/graph.service';
 
 @Module({
 	imports: [
@@ -19,9 +21,10 @@ import {FirebaseService} from './services/firebase.service';
 		AuthModule,
 		ProductModule,
 		GraphModule,
+		PurchaseModule,
 	],
 	controllers: [AppController],
-	providers: [FirebaseService],
+	providers: [FirebaseService, GraphService],
 })
 export class AppModule implements NestModule {
 	configure(consumer: MiddlewareConsumer): void {

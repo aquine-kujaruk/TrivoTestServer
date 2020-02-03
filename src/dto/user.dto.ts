@@ -1,4 +1,10 @@
-import {IsMongoId, IsNumber, IsString, MaxLength} from 'class-validator';
+import {
+	IsArray,
+	IsMongoId,
+	IsNumber,
+	IsString,
+	MaxLength,
+} from 'class-validator';
 
 export class User {
 	@IsString()
