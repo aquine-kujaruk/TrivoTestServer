@@ -4,7 +4,7 @@ export const ProductsSchema = new mongoose.Schema(
 	{
 		name: String,
 		description: String,
-		picture: String,
+		picture: {type: String, default: 'image'},
 	},
 	{timestamps: true},
 );

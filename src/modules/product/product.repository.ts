@@ -37,7 +37,7 @@ export class ProductRepository {
 
 	async createProduct(product: Product): Promise<Product> {
 		try {
-			const newProduct = this.productDb(product);
+			const newProduct = new this.productDb(product);
 
 			await newProduct.save();
 
@@ -60,24 +60,6 @@ export class ProductRepository {
 			return this.productDb.deleteOne({_id: id});
 		} catch (e) {
 			throw new InternalServerErrorException('deleteProduct Database error', e);
-		}
-	}
-
-	async searchProduct(
-		search: string,
-		sortOrder: string,
-		pageNumber: number,
-		pageSize: number,
-	): Promise<Product[]> {
-		try {
-			const query = new RegExp(search, 'i');
-			return this.productDb.find({name: query}, null, {
-				skip: pageNumber * pageSize,
-				limit: pageSize,
-				sort: {seqNo: sortOrder},
-			});
-		} catch (e) {
-			throw new InternalServerErrorException('searchProduct Database error', e);
 		}
 	}
 }

@@ -5,8 +5,9 @@ import {
 	IsString,
 	MaxLength,
 } from 'class-validator';
+import {Document} from 'mongoose';
 
-export class User {
+export class User extends Document {
 	@IsString()
 	@IsMongoId()
 	_id: string;
@@ -25,4 +26,7 @@ export class User {
 
 	@IsNumber()
 	age: number;
+
+	@IsArray()
+	products: string[];
 }

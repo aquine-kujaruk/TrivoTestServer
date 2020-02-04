@@ -31,7 +31,7 @@ export class AuthRepository {
 
 	async RegisterUser(user: User): Promise<User> {
 		try {
-			const registeredUser = await this.userDb({
+			const registeredUser = await new this.userDb({
 				...user,
 				roles: ['USER'],
 			}).save();
@@ -41,6 +41,18 @@ export class AuthRepository {
 			return registeredUser;
 		} catch (e) {
 			throw new InternalServerErrorException('Register Database error', e);
+		}
+	}
+
+	async updateUser(id: string, age: number): Promise<any> {
+		try {
+			return this.userDb.findByIdAndUpdate(
+				id,
+				{age},
+				{new: true, upsert: true},
+			);
+		} catch (e) {
+			throw new InternalServerErrorException('updateProduct Database error', e);
 		}
 	}
 }

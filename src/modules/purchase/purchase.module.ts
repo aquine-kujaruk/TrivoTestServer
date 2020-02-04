@@ -1,6 +1,7 @@
 import {Module} from '@nestjs/common';
 import {MongooseModule} from '@nestjs/mongoose';
-import {PurchaseSchema} from 'src/schemas/purchase.schema';
+import {UsersSchema} from 'src/schemas/user.schema';
+import {GraphService} from 'src/services/graph.service';
 import {PurchaseController} from './purchase.controller';
 import {PurchaseRepository} from './purchase.repository';
 
@@ -8,12 +9,12 @@ import {PurchaseRepository} from './purchase.repository';
 	imports: [
 		MongooseModule.forFeature([
 			{
-				name: 'Purchase',
-				schema: PurchaseSchema,
+				name: 'User',
+				schema: UsersSchema,
 			},
 		]),
 	],
-	providers: [PurchaseRepository],
+	providers: [PurchaseRepository, GraphService],
 	controllers: [PurchaseController],
 })
 export class PurchaseModule {}

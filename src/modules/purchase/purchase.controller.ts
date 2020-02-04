@@ -1,4 +1,6 @@
-import {Body, Controller, Get, Param, Post, UseGuards} from '@nestjs/common';
+import {Body, Controller, Get, Param, Put, UseGuards} from '@nestjs/common';
+import * as mongoose from 'mongoose';
+import {Product} from 'src/dto/product.dto';
 import {AuthenticationGuard} from 'src/guards/authentication.guard';
 import {PurchaseRepository} from './purchase.repository';
 
@@ -7,18 +9,16 @@ import {PurchaseRepository} from './purchase.repository';
 export class PurchaseController {
 	constructor(private _purchaseRepo: PurchaseRepository) {}
 
-	@Post()
-	async createPurchase(@Body() productId: number, @Body() userId: number) {
-		return;
+	@Put(':id')
+	async createPurchase(
+		@Param('id') id: string,
+		@Body() changes: any,
+	): Promise<any> {
+		return this._purchaseRepo.createPurchase(id, changes.productId);
 	}
 
-	@Get(':id')
-	async getPurchasesByUser(@Param('id') userId: string) {
-		return;
-	}
-
-	@Get()
+	@Get('/graph')
 	async getPurchasesGraphByAges() {
-		return;
+		return this._purchaseRepo.getPurchasesGraphByAges();
 	}
 }

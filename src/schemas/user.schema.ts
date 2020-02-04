@@ -8,6 +8,7 @@ export const UsersSchema = new mongoose.Schema(
 		email: String,
 		roles: [{type: String}],
 		age: Number,
+		products: [{type: mongoose.Schema.Types.ObjectId, ref: 'Product'}],
 	},
 	{timestamps: true},
 );

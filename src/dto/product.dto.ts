@@ -1,6 +1,7 @@
 import {IsMongoId, IsString} from 'class-validator';
+import {Document} from 'mongoose';
 
-export class Product {
+export class Product extends Document {
 	@IsString()
 	@IsMongoId()
 	_id: string;
