@@ -21,12 +21,11 @@ export class GetUserMiddleware implements NestMiddleware {
 				.auth()
 				.verifyIdToken(token);
 
+			console.log(firebaseInfo);
+
 			if (firebaseInfo) {
 				const user: Partial<User> = {
 					_id: firebaseInfo.sub,
-					name: firebaseInfo.name,
-					picture: firebaseInfo.picture,
-					email: firebaseInfo.email,
 					roles: firebaseInfo.roles || [],
 				};
 

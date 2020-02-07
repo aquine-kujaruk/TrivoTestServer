@@ -12,15 +12,6 @@ export class User extends Document {
 	@IsMongoId()
 	_id: string;
 
-	@IsString()
-	name: string;
-
-	@IsString()
-	picture: string;
-
-	@IsString()
-	email: string;
-
 	@MaxLength(10, {each: true})
 	roles: string[];
 

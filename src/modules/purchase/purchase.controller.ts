@@ -1,6 +1,4 @@
 import {Body, Controller, Get, Param, Put, UseGuards} from '@nestjs/common';
-import * as mongoose from 'mongoose';
-import {Product} from 'src/dto/product.dto';
 import {AuthenticationGuard} from 'src/guards/authentication.guard';
 import {PurchaseRepository} from './purchase.repository';
 
@@ -19,6 +17,8 @@ export class PurchaseController {
 
 	@Get('/graph')
 	async getPurchasesGraphByAges() {
+		console.log('hey');
+
 		return this._purchaseRepo.getPurchasesGraphByAges();
 	}
 }

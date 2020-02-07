@@ -44,6 +44,14 @@ export class AuthRepository {
 		}
 	}
 
+	async getUser(user: User): Promise<User> {
+		try {
+			return await this.userDb.findById(user._id);
+		} catch (e) {
+			throw new InternalServerErrorException('getUser Database error', e);
+		}
+	}
+
 	async updateUser(id: string, age: number): Promise<any> {
 		try {
 			return this.userDb.findByIdAndUpdate(

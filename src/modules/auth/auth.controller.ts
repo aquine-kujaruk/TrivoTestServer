@@ -1,6 +1,7 @@
 import {
 	Body,
 	Controller,
+	Get,
 	Param,
 	Post,
 	Put,
@@ -18,14 +19,16 @@ export class AuthController {
 
 	@Post('/login')
 	async login(@Req() req): Promise<User> {
+		return this._authRepo.getUser({...req.user});
+	}
+
+	@Get('/user')
+	async getUser(@Req() req): Promise<User> {
 		return this._authRepo.login({...req.user});
 	}
 
-	@Put('/user/age/:id')
-	async updateUser(
-		@Param('id') id: string,
-		@Body() changes: any,
-	): Promise<any> {
-		return this._authRepo.updateUser(id, changes.age);
+	@Put('/user/age')
+	async updateUser(@Req() req, @Body() changes: any): Promise<any> {
+		return this._authRepo.updateUser(req.user._id, changes.age);
 	}
 }
